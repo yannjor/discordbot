@@ -1,6 +1,6 @@
 const tabletojson = require("tabletojson").Tabletojson;
 const { MessageEmbed } = require("discord.js");
-const { spaceNum, getWn8Color } = require("../utils/common");
+const { spaceNum, getWn8Color } = require("../../utils/common");
 
 module.exports = {
   name: "wotstats",

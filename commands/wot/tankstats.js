@@ -1,7 +1,7 @@
 const tabletojson = require("tabletojson").Tabletojson;
 const { MessageEmbed } = require("discord.js");
-const { spaceNum, getWn8Color } = require("../utils/common");
-const { TANK_STAT_LIMIT } = require("../utils/config");
+const { spaceNum, getWn8Color } = require("../../utils/common");
+const { TANK_STAT_LIMIT } = require("../../utils/config");
 
 module.exports = {
   name: "tankstats",
