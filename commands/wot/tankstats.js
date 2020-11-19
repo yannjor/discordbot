@@ -1,6 +1,6 @@
-const tabletojson = require("tabletojson").Tabletojson;
 const { MessageEmbed } = require("discord.js");
-const { spaceNum, getWn8Color } = require("../../utils/common");
+const { spaceNum } = require("../../utils/common");
+const { getWn8Color, getWotLifeStats } = require("../../utils/wotutils");
 const { TANK_STAT_LIMIT } = require("../../utils/config");
 
 module.exports = {
@@ -13,9 +13,7 @@ module.exports = {
   execute: async (message, args) => {
     try {
       const tankName = args.slice(1).join(" ");
-      const json = await tabletojson.convertUrl(
-        `https://wot-life.com/eu/player/${args[0]}`
-      );
+      const json = await getWotLifeStats(args[0]);
       const allTankStats = json[json.length - 1];
       let tankStats = allTankStats.filter((tank) =>
         tank["Tank Name"].toLowerCase().includes(tankName.toLowerCase())
@@ -41,7 +39,7 @@ module.exports = {
           .setDescription(description);
         return embed;
       };
-      
+
       for (const tank of tankStats) {
         message.channel.send(createEmbed(tank));
       }

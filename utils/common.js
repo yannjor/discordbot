@@ -87,19 +87,6 @@ const spaceNum = (num) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
 
-const getWn8Color = (wn8) => {
-  if (wn8 < 300) return "#930d0d";
-  else if (wn8 < 450) return "#cd3333";
-  else if (wn8 < 650) return "#cc7a00";
-  else if (wn8 < 900) return "#ccb800";
-  else if (wn8 < 1200) return "#849b24";
-  else if (wn8 < 1600) return "#4d7326";
-  else if (wn8 < 2000) return "#4099bf";
-  else if (wn8 < 2450) return "#3972c6";
-  else if (wn8 < 2900) return "#793db6";
-  else return "#401070";
-};
-
 // Functions to help with importing of command files
 const getDirectories = (source) => {
   return readdirSync(source, { withFileTypes: true })
@@ -132,6 +119,5 @@ module.exports = {
   getCoronaStats,
   getUrbanDictionaryQuery,
   spaceNum,
-  getWn8Color,
   getAllCommandFiles
 };
