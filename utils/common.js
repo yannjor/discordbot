@@ -1,5 +1,7 @@
 const axios = require("axios").default;
 var xml2js = require("xml2js");
+const { join } = require("path");
+const { readdirSync, statSync } = require("fs");
 
 const getRedditPost = async (sub, top, limit) => {
   const redditUrl = `https://www.reddit.com/r/${sub}.json?limit=${limit}&sort=top&t=${top}`;
@@ -81,7 +83,9 @@ const getMetarData = async (query) => {
 };
 
 // Adds spaces between thousands
-const spaceNum = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+const spaceNum = (num) => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+};
 
 const getWn8Color = (wn8) => {
   if (wn8 < 300) return "#930d0d";
@@ -96,6 +100,31 @@ const getWn8Color = (wn8) => {
   else return "#401070";
 };
 
+// Functions to help with importing of command files
+const getDirectories = (source) => {
+  return readdirSync(source, { withFileTypes: true })
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
+};
+
+const isCommandFile = (path) => {
+  return statSync(path).isFile() && path.endsWith(".js");
+};
+
+const getCommandFiles = (path) => {
+  return readdirSync(path)
+    .map((name) => join(path, name))
+    .filter(isCommandFile);
+};
+
+const getAllCommandFiles = (path) => {
+  let dirs = getDirectories(path).map((name) => join(path, name));
+  let files = dirs
+    .map((dir) => getAllCommandFiles(dir))
+    .reduce((a, b) => a.concat(b), []);
+  return files.concat(getCommandFiles(path)).map((file) => "./".concat(file));
+};
+
 module.exports = {
   getMetarData,
   getRedditPost,
@@ -103,5 +132,6 @@ module.exports = {
   getCoronaStats,
   getUrbanDictionaryQuery,
   spaceNum,
-  getWn8Color
+  getWn8Color,
+  getAllCommandFiles
 };
