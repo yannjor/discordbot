@@ -1,6 +1,6 @@
-const tabletojson = require("tabletojson").Tabletojson;
 const { MessageEmbed } = require("discord.js");
-const { spaceNum, getWn8Color } = require("../../utils/common");
+const { spaceNum } = require("../../utils/common");
+const { getWn8Color, getWotLifeStats } = require("../../utils/wotutils");
 
 module.exports = {
   name: "wotstats",
@@ -10,10 +10,7 @@ module.exports = {
   aliases: ["ws"],
   execute: async (message, args) => {
     try {
-      const json = await tabletojson.convertUrl(
-        `https://wot-life.com/eu/player/${args[0]}`
-      );
-
+      const json = await getWotLifeStats(args[0]);
       const overallStats = json[0][json[0].length - 1];
       const description = `Win ratio: ${json[0][3]["Past 24 hours"]}
         Battles: ${spaceNum(json[0][1]["WN8"])}
