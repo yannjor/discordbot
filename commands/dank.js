@@ -4,7 +4,7 @@ module.exports = {
   name: "dank",
   args: false,
   description: "Get a random meme from some meme-containing subreddits",
-  execute: async (message, args) => {
+  execute: async (message) => {
     const subreddits = [
       "dankmemes",
       "historymemes",

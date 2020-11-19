@@ -13,14 +13,14 @@ for (const file of getAllCommandFiles("./commands")) {
 const helpCommand = {
   name: "help",
   description: "Help command",
-  execute: (message, args) => {
+  execute: (message) => {
     const commands = client.commands
       .keyArray()
       .map((name) => {
-        const { arguments, description } = client.commands.get(name);
+        const command = client.commands.get(name);
         return `${PREFIX}${name} ${
-          arguments ? arguments : ""
-        } - ${description}`;
+          command.arguments ? command.arguments : ""
+        } - ${command.description}`;
       })
       .join("\n");
 
