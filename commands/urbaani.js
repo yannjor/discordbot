@@ -16,7 +16,7 @@ module.exports = {
 
       const parseHtml = (text) => {
         return text
-          .replace(/&quot;/g, '"')
+          .replace(/&quot;/g, "\"")
           .replace(/&#39;/g, "'")
           .replace(/<br \/>/g, "\n")
           .replace(/&lt;/g, "<")
@@ -24,7 +24,7 @@ module.exports = {
       };
 
       const box = parseHtml(
-        data.match(/<div class=\"box\">(.*?)<div class=\"clearfix\">/s)[0]
+        data.match(/<div class="box">(.*?)<div class="clearfix">/s)[0]
       );
       const title = box.match(/(?<=<h1>)(.*)(?=<\/h1>)/g)[0];
       const definition = box.match(/(?<=<p>)(.*)(?=<\/p>)/gs)[0];
