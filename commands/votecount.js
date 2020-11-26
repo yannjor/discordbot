@@ -18,8 +18,8 @@ module.exports = {
         .setTitle("Vote results")
         .addFields(
           { name: "Orange", value: heigts[0], inline: true },
-          { name: "Blue", value: heigts[1], inline: true },
-          { name: "Green", value: heigts[2], inline: true }
+          { name: "Blue",   value: heigts[1], inline: true },
+          { name: "Green",  value: heigts[2], inline: true }
         );
       message.channel.send(embed);
     } catch (exception) {
